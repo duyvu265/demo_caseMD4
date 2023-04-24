@@ -1,0 +1,53 @@
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Category</th>
+
+    </tr>
+        <tr>
+            <td scope="col"><%= product.name %></td>
+            <td scope="col" id="price"><%= product.price %></td>
+            <td scope="col"><%= product.quantity %></td>
+            <td scope="col"><%= product.category.name %></td>
+        </tr>
+    </thead>
+
+
+
+<!--    <tr class="">-->
+<!--        <a href="">BUY: <input type="text" value="<%#Price %>"></a>-->
+<!--    </tr>-->
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>

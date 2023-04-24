@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Site Metas -->
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>Ninom</title>
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css"/>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Dosis:400,600,700|Poppins:400,600,700&display=swap"
+          rel="stylesheet"/>
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet"/>
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet"/>
+</head>
+
+<body class="sub_page">
+<div class="hero_area">
+    <!-- header section strats -->
+    <div class="brand_box">
+        <a class="navbar-brand" href="index.html">
+        <span>
+          Ninom
+        </span>
+        </a>
+    </div>
+    <!-- end header section -->
+</div>
+
+<!-- nav section -->
+
+<section class="nav_section">
+    <div class="container">
+        <div class="custom_nav2">
+            <nav class="navbar navbar-expand custom_nav-container ">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="d-flex  flex-column flex-lg-row align-items-center">
+                        <ul class="navbar-nav  ">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="about.html">About </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="fruit.html">Our Fruit </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="testimonial.html">Testimonial</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.html">Contact Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Login</a>
+                            </li>
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+                            <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<!-- end nav section -->
+
+
+<!-- contact section -->
+<section class="contact_section layout_padding">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="offset-lg-2 col-md-10 offset-md-1">
+                <div class="heading_container">
+                    <hr>
+                    <h2>
+                       UPLOAD PRODUCT
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="layout_padding2-top">
+            <div class="row">
+                <div class="col-lg-4 offset-lg-2 col-md-5 offset-md-1">
+                    <form method="post" action="">
+                        <div class="contact_form-container">
+                            <div>
+                                <div>
+                                    <input type="text" placeholder="name" name="name" required/>
+                                </div>
+                                <div>
+                                    <input type="number" placeholder="price" name="price" required/>
+                                </div>
+                                <div>
+                                    <input type="number" placeholder="quantity" name="quantity" required/>
+                                </div>
+
+                                <div>
+                                    <select name="category" required>
+                                        <% categoryList.forEach(item=>{ %>
+                                        <option value="<%=item.id%>"><%=item.name%> </option>
+                                        <%  })  %>
+                                    </select>
+
+                                </div>
+                                <div>
+                                    <input type="file" id="fileButton" onchange="uploadImage(event)" required>
+                                    <div style="height: 100px; width: 100px" id="imgDiv"></div>
+                                    <input id="image" type="hidden"  name="image" required/>
+                                </div>
+
+                                <div>
+                                    <button type="submit">
+                                        Send
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 px-0">
+                    <div class="map_container">
+                        <div class="map-responsive">
+                            <img src=images/maxresdefault.jpg
+                                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end contact section -->
+
+
+<!-- info section -->
+
+<section class="info_section layout_padding">
+    <div class="container">
+        <div class="info_logo">
+            <h2>
+                NiNom
+            </h2>
+        </div>
+        <div class="info_contact">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="">
+                        <img src="images/location.png" alt="">
+                        <span>
+                Passages of Lorem Ipsum available
+              </span>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="">
+                        <img src="images/call.png" alt="">
+                        <span>
+                Call : +012334567890
+              </span>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="">
+                        <img src="images/mail.png" alt="">
+                        <span>
+                demo@gmail.com
+              </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-lg-9">
+                <div class="info_form">
+                    <form action="">
+                        <input type="text" placeholder="Enter your email">
+                        <button>
+                            subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="info_social">
+                    <div>
+                        <a href="">
+                            <img src="images/facebook-logo-button.png" alt="">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <img src="images/twitter-logo-button.png" alt="">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <img src="images/linkedin.png" alt="">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <img src="images/instagram.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- end info section -->
+
+
+<!-- footer section -->
+<section class="container-fluid footer_section">
+    <p>
+        &copy; <span id="displayYear"></span> All Rights Reserved By
+        <a href="https://html.design/">Free Html Templates</a>
+    </p>
+</section>
+<!-- footer section -->
+
+
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+
+
+<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyD829BBStJ2n7dvGvOAo06Y-Wl5MULUX6E",
+        authDomain: "store-2b5fe.firebaseapp.com",
+        projectId: "store-2b5fe",
+        storageBucket: "store-2b5fe.appspot.com",
+        messagingSenderId: "894267325894",
+        appId: "1:894267325894:web:38610d90b2f66b9ff8c6c7",
+        measurementId: "G-ZSFP6E5SHZ"
+    };
+    firebase.initializeApp(firebaseConfig);
+</script>
+
+<script type="text/javascript">
+    function uploadImage(e) {
+        let fbBucketName = 'images';
+        let uploader = document.getElementById('uploader');
+        let file = e.target.files[0];
+        let storageRef = firebase.storage().ref(`${fbBucketName}/${file.name}`);
+        let uploadTask = storageRef.put(file);
+        uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+            function (snapshot) {
+                uploader.value = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                switch (snapshot.state) {
+                    case firebase.storage.TaskState.PAUSED:
+                        break;
+                    case firebase.storage.TaskState.RUNNING:
+                        break;
+                }
+            }, function (error) {
+                switch (error.code) {
+                    case 'storage/unauthorized':
+                        break;
+                    case 'storage/canceled':
+                        break;
+                    case 'storage/unknown':
+                        break;
+                }
+            }, function () {
+                let downloadURL = uploadTask.snapshot.downloadURL;
+                document.getElementById('imgDiv').innerHTML = `<img src="${downloadURL}" alt="">`
+                localStorage.setItem('image', downloadURL);
+                document.getElementById('image').value=downloadURL;
+
+            });
+    }
+</script>
+
+
+</body>
+
+</html>

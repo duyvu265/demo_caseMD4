@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <!-- Site Metas -->
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <title>CHÈ SẦU</title>
+
+    <!-- slider stylesheet -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css"/>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css"/>
+
+    <!-- fonts style -->
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Dosis:400,600,700|Poppins:400,600,700&display=swap"
+          rel="stylesheet"/>
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet"/>
+    <!-- responsive style -->
+    <link href="/css/responsive.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+</head>
+
+<body>
+<div class="hero_area">
+    <!-- header section strats -->
+    <div class="brand_box">
+        <a class="navbar-brand" href="index.html">
+        <span>
+          Ninom
+        </span>
+        </a>
+    </div>
+    <!-- end header section -->
+    <!-- slider section -->
+    <section class=" slider_section position-relative">
+        <div id="carouselExampleControls" class="carousel slide " data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="img-box">
+                        <img src="/images/che-sau-rieng-da-nang-12.jpg" alt="">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="img-box">
+                        <img src="/images/recipe_2229 (1).jpg" alt="">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="img-box">
+                        <img src="images/nhung-quan-che-sau-ngon-o-da-nang-3.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </section>
+    <!-- end slider section -->
+</div>
+
+<!-- nav section -->
+
+<section class="nav_section">
+    <div class="container">
+        <div class="custom_nav2">
+            <nav class="navbar navbar-expand custom_nav-container ">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="">
+                    <center><a href="add"> ADD</a></center>
+                </div>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<!-- end nav section -->
+
+<!-- shop section -->
+
+<section class="shop_section layout_padding">
+    <div class="container">
+        <div class="box">
+            <div class="detail-box">
+                <h2>
+                    CHÈ SẦU
+                </h2>
+                <p>
+                    Sầu Vì Chè
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- end shop section -->
+
+<!-- about section -->
+
+<section class="about_section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 px-0">
+                <div class="img-box">
+                    <img src="/images/combo.jpg" alt="">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="detail-box">
+                    <div class="heading_container">
+                        <hr>
+                        <h2>
+                            About Our CHÈ SẦU
+                        </h2>
+                    </div>
+                    <p>
+                        CHÈ SẦU là món ngon khá kén người ăn. Người ăn được thì nghiện vô cùng, người không ăn được thì
+                        đến ngửi cũng không chịu nổi. Thế nhưng đây lại là một trong những món ăn vặt hút khách nhất, ở
+                        đâu có chè sầu là ở đó có những tín đồ trung thành của sầu riêng. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- end about section -->
+
+<!-- fruit section -->
+
+<section class="fruit_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <hr>
+            <h2>
+                Chè Sầu-Sầu vì Chè
+            </h2>
+        </div>
+    </div>
+    <% products.map(item=>{ %>
+    <div class="container-fluid">
+
+        <div class="fruit_container">
+
+            <div class="box">
+                <img src="<%= item.image %>" >
+                <div class="link_box">
+                    <h5>
+                        <%= item.name %>
+                    </h5>
+                    <h5>
+                        <%= item.price %>
+                    </h5>
+                    <h5>
+                        <%= item.category.name %>
+                    </h5>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop">
+                        DELETE
+                    </button>
+
+                    <a href="/edit/<%= item.id %>">
+                        EDIT
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+             tabindex="-1"
+             aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Delete ?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>
+                        <a href="/delete/<%= item.id %>" type="button" class="btn btn-primary">Yes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+
+    </div>
+</section>
+
+<!-- end fruit section -->
+
+
+<!-- client section -->
+
+<section class="client_section layout_padding-bottom">
+    <div class="container ">
+        <div class="heading_container">
+            <hr>
+        </div>
+        <div id="carouselExample2Controls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="client_container layout_padding-top">
+                        <div class="img-box">
+                            <img src="/images/Screenshot 2023-04-19 105823.png" alt="">
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                THÔNG TIN LIÊN HỆ:
+                            </h5>
+                            <p>
+                                <img src="/images/left-quote.png" alt="">
+                                <span>
+                    Dễ nhìn ,Dễ tìm
+                  </span>
+                                <img src="/images/right-quote.png" alt=""> <br>
+
+                                THÔNG TIN LIÊN HỆ:
+                                Địa chỉ: Số 1 Nguyễn Huy Tưởng, Quận Thanh Xuân, Hà Nội
+                                Giờ mở cửa: 08:30 - 23:00
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="client_container layout_padding-top">
+                        <div class="img-box">
+                            <img src="/images/recipe_2229 (1).jpg" alt="">
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                Menu Đa dạng
+                            </h5>
+                            <p>
+                                <img src="/images/left-quote.png" alt="">
+                                <span>
+                     Thực Đơn Phong Phú
+                  </span>
+                                <img src="/images/right-quote.png" alt=""> <br>
+                                Ngoài chè sầu riêng, menu quán cũng có thêm những loại chè và món ăn vặt khác hấp dẫn
+                                không kém. Chè Xưa - Chè Sầu & Ăn Vặt có cơ cở tại quận Thanh Xuân rất dễ tìm. Mức giá
+                                dao động cho một tô chè từ 10.000 – 33.000 VNĐ. Giá thành quá rẻ so với chất lượng mà
+                                người dùng nhận được. Có không ít người đánh giá rằng, chè sầu riêng ở đây là món chè
+                                gây thương nhớ mà bất kì ai khi tới Hà Nội đều phải thử qua. Giá cả vừa phải, dễ tìm, dễ
+                                ăn, đã vậy mùi vị lại còn thơm ngon khó cưỡng - chẳng trách sao mà suốt bao năm qua, chè
+                                sầu vẫn luôn là thức ăn vặt được yêu thích hàng đầu của giới trẻ Việt.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="client_container layout_padding-top">
+                        <div class="img-box">
+                            <img src="/images/che-sau-rieng-da-nang-12.jpg" alt="">
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                Nguyên Liệu sạch
+                            </h5>
+                            <p>
+                                <img src="/images/left-quote.png" alt="">
+                                <span>
+                  Nguyên liệu của món chè sầu
+                  </span>
+                                <img src="/images/right-quote.png" alt=""> <br>
+                                Nguyên liệu của món chè sầu được chuẩn bị đầy đủ, kĩ lưỡng gồm sầu riêng, mít chín, đậu
+                                xanh, vải thiều, nước cốt dừa. Đặc biệt, trong tô chè đầy ụ còn có thêm sữa tươi và
+                                thạch rau câu vô cùng ngon miệng. Chè sầu riêng đậu xanh bột báng, chè không dùng hương
+                                liệu. Loại ít ngọt. Được nấu bằng đậu xanh với cơm sầu riêng loại 1. Chè ăn kèm nước dừa
+                                đặc biệt của quán. Rất thích hợp ăn tráng miệng hoặc ăn xế thay thế các món như Trà sữa.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExample2Controls" role="button" data-slide="prev">
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExample2Controls" role="button" data-slide="next">
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- end client section -->
+
+
+<!-- contact section -->
+
+<!-- end contact section -->
+
+
+<!-- info section -->
+
+<section class="info_section layout_padding">
+    <div class="container">
+        <div class="info_logo">
+            <h2>
+                CHÈ SẦU
+            </h2>
+        </div>
+        <div class="info_contact">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="">
+                        <img src="/images/location.png" alt="">
+                        <span>
+                Passages of Lorem Ipsum available
+              </span>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="">
+                        <img src="/images/call.png" alt="">
+                        <span>
+                Call : +012334567890
+              </span>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="">
+                        <img src="/images/mail.png" alt="">
+                        <span>
+                demo@gmail.com
+              </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-lg-9">
+                <div class="info_form">
+                    <form action="">
+                        <input type="text" placeholder="Enter your email">
+                        <button>
+                            subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3">
+                <div class="info_social">
+                    <div>
+                        <a href="">
+                            <img src="/images/facebook-logo-button.png" alt="">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <img src="/images/twitter-logo-button.png" alt="">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <img src="/images/linkedin.png" alt="">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="">
+                            <img src="/images/instagram.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- end info section -->
+
+
+<!-- footer section -->
+
+<!-- footer section -->
+
+<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.js"></script>
+<script type="text/javascript" src="/js/custom.js"></script>
+<script>
+    let myModal = document.getElementById('myModal')
+    let myInput = document.getElementById('myInput')
+
+    myModal.addEventListener('shown.bs.modal', function () {
+        myInput.focus()
+    })
+</script>
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+
+<!--<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"-->
+<!--     aria-labelledby="staticBackdropLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="staticBackdropLabel">Delete ?</h5>-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                ...-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">NO</button>-->
+<!--                <button type="button" class="btn btn-primary">Yes</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+</body>
+
+</html>
