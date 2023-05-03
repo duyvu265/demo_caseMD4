@@ -1,11 +1,11 @@
 
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 
-
+import {orderList} from "./orderList";
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
-    idUser: string;
+    id: number;
     @Column({type: 'varchar', length: 255})
     fullName: string;
     @Column()
@@ -15,14 +15,14 @@ export class User {
     @Column({type: 'text'})
     phoneNumber: number
     @Column()
-
     address: string;
-
     @Column({
         name:'role',
         type: 'int',
         default: 1,
     })
-    role: number
+    role: number;
+    @OneToMany(()=>orderList,(orderList)=>orderList.userId)
+    order:orderList[]
 
 }

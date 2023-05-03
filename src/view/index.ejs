@@ -190,11 +190,11 @@
                     </h5>
                     </a>
                     <iframe name="dummyframe" id="dummyframe" style="display: none"></iframe>
-                    <form action="/addToCart" method="post" target="dummyframe" id="form-<%=item._id %>">
-                        <input type="text" value="<%=item._id %>" name="idProduct" hidden>
+                    <form action="/addToCart" method="post" target="dummyframe" id="form-<%=item.id %>">
+                        <input type="text" value="<%=item.id %>" name="idProduct" hidden>
                     </form>
-                    <a href="#" class="shopping-cart" onclick=" document.getElementById('form-<%=item._id %>').submit()">ADD SHOPPING CART</a>
-                    <a href="buynow/<%=item._id%>">
+                    <a href="#" class="shopping-cart" onclick=" document.getElementById('form-<%=item.id %>').submit()">ADD SHOPPING CART</a>
+                    <a href="buynow/<%=item.id%>">
                         Buy Now
                     </a>
                 </div>

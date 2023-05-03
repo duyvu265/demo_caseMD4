@@ -5,7 +5,8 @@ declare class UserSevice {
     findById: (id: any) => Promise<any>;
     findUser: (id: any) => Promise<any>;
     checkEmail: (email: any) => Promise<void>;
-    checkEmailAndPass: (userData: any) => Promise<any>;
+    checkEmailAndPass: (email: any, pass: any) => Promise<any>;
+    changeG: () => Promise<void>;
 }
 declare const _default: UserSevice;
 export default _default;

@@ -25,5 +25,6 @@ router.get('/cart', productController_1.default.showCart);
 router.post('/addToCart', productController_1.default.addToCart);
 router.get('/bougth', productController_1.default.showBougth);
 router.get('/buynow/:id', productController_1.default.showBuy);
+router.get('/deleteByUser/:id', productController_1.default.deleteProductByUser);
 exports.default = router;
 //# sourceMappingURL=router.js.map

@@ -1,4 +1,5 @@
 import { Category } from "./category";
+import { orderDetail } from "./orderDetail";
 export declare class Product {
     id: number;
     name: string;
@@ -6,4 +7,5 @@ export declare class Product {
     price: number;
     image: string;
     category: Category;
+    orderDetailId: orderDetail[];
 }

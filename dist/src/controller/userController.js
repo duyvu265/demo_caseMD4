@@ -19,12 +19,11 @@ class userController {
         };
         this.login = async (req, res) => {
             let userData = req.body;
-            let user = await this.userSevice.checkEmailAndPass(userData);
-            if (!user) {
-                res.redirect(301, '/login');
-            }
-            else {
-                if (user.role === 0) {
+            let email = userData.email;
+            let pass = userData.password;
+            let user = await this.userSevice.checkEmailAndPass(email, pass);
+            if (user != undefined) {
+                if (user['role'] === 0) {
                     req.session['user'] = user;
                     res.redirect(301, '/admin');
                 }
@@ -32,6 +31,9 @@ class userController {
                     req.session['user'] = user;
                     res.redirect(301, '/index');
                 }
+            }
+            else {
+                res.redirect(301, '/login');
             }
         };
         this.logout = (req, res) => {

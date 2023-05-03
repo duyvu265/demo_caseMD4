@@ -18,23 +18,14 @@ class ProductSevice {
         return product;
     }
     add = async (product) => {
-
         await this.productRepositori.save(product)
-
     }
     findByIdProduct = async (id) => {
-        let product = await this.productRepositori.find({
-                relations: {
-                    category: true,
-                },
-                where: {
-                    id: id
-                }
-            }
+        let product = await this.productRepositori.query(`select * from order_detail od join order_list ol on ol.orderId = od.orderIdOrderId 
+                join product ON product.id=od.orderIdOrderId
+                where ol.userIdId=${id} and status=0`
         )
-        return product[0]
-
-
+        return product
     }
     edit = async (id, data) => {
         await this.productRepositori.update({id: id}, {
@@ -46,9 +37,7 @@ class ProductSevice {
     }
     deleteProduct = async (id) => {
         await this.productRepositori.delete({
-            where: {
                 id: id
-            }
         })
         console.log("delete ok")
     }

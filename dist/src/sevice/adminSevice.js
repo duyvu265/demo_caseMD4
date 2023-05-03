@@ -11,12 +11,12 @@ class UserSevice {
         this.add = async (user) => {
             await this.userRepository.save(user);
         };
-        this.getAll = async () => {
+        this.getAllProduct = async () => {
             let product = await productSevice_1.default.getAll();
             return product;
         };
         this.findById = async (id) => {
-            let arrUser = await this.userRepository.find({ _id: id });
+            let arrUser = await this.userRepository.find({ id: id });
             return arrUser[0];
         };
         this.userRepository = data_source_1.AppDataSource.getRepository(user_1.User);

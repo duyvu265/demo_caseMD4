@@ -14,8 +14,8 @@ class userController {
     }
     addUser = async (req: Request, res: Response) => {
         let user = req.body;
-            await this.userSevice.addNewUser(user);
-            res.redirect(301, '/login');
+        await this.userSevice.addNewUser(user);
+        res.redirect(301, '/login');
     }
     showFormSignIn = (req: Request, res: Response) => {
         res.render('user/login')
@@ -23,17 +23,19 @@ class userController {
     }
     login = async (req: Request, res: Response) => {
         let userData = req.body;
-        let user = await this.userSevice.checkEmailAndPass(userData);
-        if (!user) {
-            res.redirect(301, '/login');
-        } else {
-            if (user.role === 0) {
-                req.session['user'] = user;
+        let email = userData.email;
+        let pass = userData.password;
+        let user = await this.userSevice.checkEmailAndPass(email, pass);
+        if (user != undefined) {
+            if (user['role'] === 0) {
+                req.session['user'] = user
                 res.redirect(301, '/admin');
             } else {
-                req.session['user'] = user;
+                req.session['user'] = user
                 res.redirect(301, '/index');
             }
+        } else {
+            res.redirect(301, '/login');
         }
 
 

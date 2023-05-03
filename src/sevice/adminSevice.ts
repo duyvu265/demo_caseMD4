@@ -1,9 +1,6 @@
 import {User} from "../entity/user";
-
 import {AppDataSource} from "../data-source";
 import ProductSevice from "./productSevice";
-
-
 class UserSevice {
     private userRepository
 
@@ -12,19 +9,19 @@ class UserSevice {
     }
 
     add = async (user) => {
+
         await this.userRepository.save(user);
 
     }
-    getAll = async () => {
+    getAllProduct = async () => {
 
         let product = await ProductSevice.getAll();
 
         return product;
     }
     findById = async (id) => {
-        let arrUser = await this.userRepository.find({_id: id})
+        let arrUser = await this.userRepository.find({id: id})
         return arrUser[0];
-
 
     }
 

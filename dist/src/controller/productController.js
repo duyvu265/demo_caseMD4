@@ -6,13 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const productSevice_1 = __importDefault(require("../sevice/productSevice"));
 const categorySevice_1 = __importDefault(require("../sevice/categorySevice"));
 const userSevice_1 = __importDefault(require("../sevice/userSevice"));
-const cartSevice_1 = __importDefault(require("../sevice/cartSevice"));
+const cartDetailSevice_1 = __importDefault(require("../sevice/cartDetailSevice"));
+const orderDetail_1 = require("../entity/orderDetail");
+const data_source_1 = require("../data-source");
+const orderList_1 = require("../entity/orderList");
 class ProductController {
     constructor() {
         this.findAll = async (req, res) => {
             if (req.session['user']) {
-                let id = req.session['user']._id;
-                let user = await userSevice_1.default.findUser(id);
+                let id = req.session['user'].id;
+                let user = await userSevice_1.default.findById(id);
                 if (user.role === 1) {
                     let listProduct = await productSevice_1.default.getAll();
                     res.render('index', { products: listProduct });
@@ -27,7 +30,7 @@ class ProductController {
         };
         this.showFormAdd = async (req, res) => {
             if (req.session['user']) {
-                let id = req.session['user']._id;
+                let id = req.session['user'].id;
                 let user = await userSevice_1.default.findUser(id);
                 if (user.role === 0) {
                     let listCategory = await categorySevice_1.default.getAll();
@@ -52,10 +55,10 @@ class ProductController {
         };
         this.showFormEdit = async (req, res) => {
             if (req.session['user']) {
-                let id = req.session['user']._id;
+                let id = req.session['user'].id;
                 let user = await userSevice_1.default.findUser(id);
                 let idProduct = req.params.id;
-                if (user.role === 0) {
+                if (user['role'] === 0) {
                     let data = await this.productService.findByIdProduct(idProduct);
                     let listCategory = await categorySevice_1.default.getAll();
                     res.render('product/edit', {
@@ -73,7 +76,7 @@ class ProductController {
         };
         this.editProduct = async (req, res) => {
             if (req.session['user']) {
-                let id = req.session['user']._id;
+                let id = req.session['user'].id;
                 let user = await userSevice_1.default.findUser(id);
                 let idProduct = req.params.id;
                 if (user.role === 0) {
@@ -90,10 +93,9 @@ class ProductController {
         };
         this.deleteProductByAdmin = async (req, res) => {
             if (req.session['user']) {
-                let id = req.session['user']._id;
+                let id = req.session['user'].id;
                 let user = await userSevice_1.default.findUser(id);
-                let idProduct = req.params.id;
-                console.log(idProduct);
+                let idProduct = parseInt(req.params.id);
                 if (user.role === 0) {
                     await this.productService.deleteProduct(idProduct);
                     res.redirect(301, '/admin');
@@ -111,11 +113,11 @@ class ProductController {
         };
         this.showCart = async (req, res) => {
             if (req.session['user']) {
-                let idUser = req.session['user']._id;
-                let listDataProductInCart = await cartSevice_1.default.getAllProductInUser(idUser);
-                let totalPrice;
+                let idUser = req.session['user'].id;
+                let listDataProductInCart = await cartDetailSevice_1.default.getAllProductInUser(idUser);
+                let totalPrice = 0;
                 listDataProductInCart.forEach(item => {
-                    totalPrice += item['IdProduct'].price;
+                    totalPrice += item.priceCurren;
                 });
                 res.render('user/cart', { cartList: listDataProductInCart, totalPrice: totalPrice });
             }
@@ -125,9 +127,20 @@ class ProductController {
         };
         this.addToCart = async (req, res) => {
             if (req.session['user']) {
-                let idUser = req.session['user']._id;
+                let idUser = req.session['user'].id;
                 let { idProduct } = req.body;
-                await cartSevice_1.default.add(idUser, idProduct);
+                let orderId = await cartDetailSevice_1.default.findOrderId(idUser);
+                if (!orderId) {
+                    orderId = await cartDetailSevice_1.default.cartRepository.save({ userId: idUser });
+                }
+                let product = await cartDetailSevice_1.default.findIdProduct(idProduct);
+                let currenPrice = product.price;
+                await this.orderDetail.save({
+                    quantity: 1,
+                    priceCurren: currenPrice,
+                    orderId: orderId,
+                    productId: product
+                });
             }
         };
         this.search = async (req, res) => {
@@ -153,7 +166,27 @@ class ProductController {
                 res.redirect(301, '/login');
             }
         };
+        this.deleteProductByUser = async (req, res) => {
+            if (req.session['user']) {
+                let idUser = req.session['user'].id;
+                let { idProduct } = req.body;
+                let orderId = await cartDetailSevice_1.default.findOrderId(idUser);
+                let product = await cartDetailSevice_1.default.findIdProduct(idProduct);
+                let currenPrice = product.price;
+                await this.orderDetail.delete({
+                    quantity: 1,
+                    priceCurren: currenPrice,
+                    orderId: orderId,
+                    productId: product
+                });
+            }
+            else {
+                res.redirect(301, '/login');
+            }
+        };
+        this.orderList = data_source_1.AppDataSource.getRepository(orderList_1.orderList);
         this.productService = productSevice_1.default;
+        this.orderDetail = data_source_1.AppDataSource.getRepository(orderDetail_1.orderDetail);
     }
 }
 exports.default = new ProductController();

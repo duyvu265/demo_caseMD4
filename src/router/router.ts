@@ -21,6 +21,8 @@ router.post('/addToCart',productController.addToCart)
 // router.get('/search',userController)
 router.get('/bougth',productController.showBougth)
 router.get('/buynow/:id',productController.showBuy)
+router.get('/deleteByUser/:id',productController.deleteProductByUser)
+
 
 
 export default router;

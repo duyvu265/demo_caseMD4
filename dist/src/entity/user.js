@@ -11,12 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const typeorm_1 = require("typeorm");
+const orderList_1 = require("./orderList");
 let User = class User {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
-    __metadata("design:type", String)
-], User.prototype, "idUser", void 0);
+    __metadata("design:type", Number)
+], User.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar', length: 255 }),
     __metadata("design:type", String)
@@ -45,6 +46,10 @@ __decorate([
     }),
     __metadata("design:type", Number)
 ], User.prototype, "role", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => orderList_1.orderList, (orderList) => orderList.userId),
+    __metadata("design:type", Array)
+], User.prototype, "order", void 0);
 User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);

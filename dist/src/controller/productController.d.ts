@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 declare class ProductController {
     private cartSevice;
     private productService;
+    private orderDetail;
+    private orderList;
     constructor();
     findAll: (req: Request, res: Response) => Promise<void>;
     showFormAdd: (req: Request, res: Response) => Promise<void>;
@@ -15,6 +17,7 @@ declare class ProductController {
     search: (req: Request, res: Response) => Promise<void>;
     showBougth: (req: Request, res: Response) => Promise<void>;
     showBuy: (req: Request, res: Response) => Promise<void>;
+    deleteProductByUser: (req: Request, res: Response) => Promise<void>;
 }
 declare const _default: ProductController;
 export default _default;

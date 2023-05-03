@@ -1,7 +1,6 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Category} from "./category";
-
-
+import {orderDetail} from "./orderDetail";
 
 @Entity()
 export class Product {
@@ -16,6 +15,9 @@ export class Product {
     @Column({type: 'text'})
     image: string;
     @ManyToOne(()=>Category,(category)=>category.products)
-    category:Category
+    category:Category;
+    @OneToMany(()=>orderDetail,(orderDetail)=>orderDetail.productId)
+    orderDetailId:orderDetail[];
+
 }
 

@@ -2,23 +2,30 @@ import {Request, Response} from "express";
 import ProductSevice from "../sevice/productSevice";
 import categorySevice from "../sevice/categorySevice";
 import userSevice from "../sevice/userSevice";
-import cartSevice from "../sevice/cartSevice";
+import cartSevice from "../sevice/cartDetailSevice";
 import {User} from "../entity/user";
-import {Cart} from "../entity/cart";
+import {orderDetail} from "../entity/orderDetail";
+import {AppDataSource} from "../data-source";
+import {orderList} from "../entity/orderList";
 
 
 class ProductController {
     private cartSevice;
     private productService;
+    private orderDetail;
+    private orderList;
 
     constructor() {
+        this.orderList = AppDataSource.getRepository(orderList)
         this.productService = ProductSevice;
+        this.orderDetail = AppDataSource.getRepository(orderDetail)
     }
 
     findAll = async (req: Request, res: Response) => {
         if (req.session['user']) {
-            let id = req.session['user']._id
-            let user: User = await userSevice.findUser(id)
+            let id = req.session['user'].id;
+
+            let user: User = await userSevice.findById(id)
             if (user.role === 1) {
                 let listProduct = await ProductSevice.getAll();
                 res.render('index', {products: listProduct})
@@ -33,8 +40,8 @@ class ProductController {
     }
     showFormAdd = async (req: Request, res: Response) => {
         if (req.session['user']) {
-            let id = req.session['user']._id;
-            let user: User = await userSevice.findUser(id)
+            let id = req.session['user'].id;
+            let user: User = await userSevice.findUser(id);
             if (user.role === 0) {
                 let listCategory = await categorySevice.getAll();
                 res.render('product/add', {categoryList: listCategory})
@@ -50,7 +57,6 @@ class ProductController {
         if (req.session['user']) {
 
             this.productService.add(req.body);
-
             res.redirect(301, '/admin');
         } else {
             res.redirect(301, '/login');
@@ -58,10 +64,10 @@ class ProductController {
     }
     showFormEdit = async (req: Request, res: Response) => {
         if (req.session['user']) {
-            let id = req.session['user']._id;
-            let user: User = await userSevice.findUser(id)
-            let idProduct=req.params.id
-            if (user.role === 0) {
+            let id = req.session['user'].id;
+            let user: User = await userSevice.findUser(id);
+            let idProduct = req.params.id
+            if (user['role'] === 0) {
                 let data = await this.productService.findByIdProduct(idProduct);
                 let listCategory = await categorySevice.getAll()
                 res.render('product/edit',
@@ -82,10 +88,10 @@ class ProductController {
     }
     editProduct = async (req: Request, res: Response) => {
         if (req.session['user']) {
-            let id = req.session['user']._id
+            let id = req.session['user'].id
             let user: User = await userSevice.findUser(id)
-            let idProduct=req.params.id
-            if (user.role===0) {
+            let idProduct = req.params.id
+            if (user.role === 0) {
 
                 await this.productService.edit(idProduct, req.body);
 
@@ -101,10 +107,10 @@ class ProductController {
     }
     deleteProductByAdmin = async (req: Request, res: Response) => {
         if (req.session['user']) {
-            let id = req.session['user']._id
+            let id = req.session['user'].id
             let user: User = await userSevice.findUser(id);
-            let idProduct= req.params.id;
-            console.log(idProduct)
+            let idProduct = parseInt(req.params.id);
+
             if (user.role === 0) {
                 await this.productService.deleteProduct(idProduct);
                 res.redirect(301, '/admin')
@@ -123,12 +129,14 @@ class ProductController {
     }
     showCart = async (req: Request, res: Response) => {
         if (req.session['user']) {
-            let idUser = req.session['user']._id;
-            let listDataProductInCart: Array<Cart> = await cartSevice.getAllProductInUser(idUser);
-                let totalPrice:number ;
-                listDataProductInCart.forEach(item => {
-                    totalPrice += item['IdProduct'].price
-                })
+            let idUser = req.session['user'].id;
+            let listDataProductInCart = await cartSevice.getAllProductInUser(idUser);
+            let totalPrice = 0;
+            listDataProductInCart.forEach(item => {
+                totalPrice += item.priceCurren
+            })
+
+
             res.render('user/cart', {cartList: listDataProductInCart, totalPrice: totalPrice});
 
         } else {
@@ -138,9 +146,20 @@ class ProductController {
     }
     addToCart = async (req: Request, res: Response) => {
         if (req.session['user']) {
-            let idUser = req.session['user']._id;
+            let idUser = req.session['user'].id;
             let {idProduct} = req.body;
-            await cartSevice.add(idUser, idProduct)
+            let orderId: number = await cartSevice.findOrderId(idUser);
+            if (!orderId) {
+                orderId = await cartSevice.cartRepository.save({userId: idUser})
+            }
+            let product = await cartSevice.findIdProduct(idProduct);
+            let currenPrice = product.price;
+            await this.orderDetail.save({
+                quantity: 1,
+                priceCurren: currenPrice,
+                orderId: orderId,
+                productId: product
+            })
         }
     }
     search = async (req: Request, res: Response) => {
@@ -151,6 +170,9 @@ class ProductController {
     }
     showBougth = async (req: Request, res: Response) => {
         if (req.session['user']) {
+            // await this.orderList.changeStatus(idProduct);
+
+
             res.render('user/bougth')
         } else {
             res.redirect(301, '/login')
@@ -165,7 +187,26 @@ class ProductController {
             res.redirect(301, '/login')
         }
     }
+    deleteProductByUser = async (req: Request, res: Response) => {
+        if (req.session['user']) {
+            let idUser = req.session['user'].id;
+            let {idProduct} = req.body;
+            let orderId: number = await cartSevice.findOrderId(idUser);
+            let product = await cartSevice.findIdProduct(idProduct);
+            let currenPrice = product.price;
+            await this.orderDetail.delete({
+                quantity: 1,
+                priceCurren: currenPrice,
+                orderId: orderId,
+                productId: product
+            })
+        }
+        else {
+            res.redirect(301, '/login')
+        }
 
+
+    }
 
 }
 
